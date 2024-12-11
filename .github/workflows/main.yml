@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-    #   # Step 4: Set environment variables
+     # Step 4: Set environment variables
 
       - name: Export environment variables
         run: |
