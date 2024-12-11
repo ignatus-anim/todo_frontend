@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [docker_build_and_push]
     steps:
-      # Deployment step (e.g., to AWS, Kubernetes, etc.)
+      # Deployment step (e.g., to AWS, Kubernetes, etc)
       - name: Deploy to Hosting Service
         run: |
           echo "Deploying the frontend..."
