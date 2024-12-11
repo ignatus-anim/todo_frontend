@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: node:20-alpine # Lightweight Node.js base image
+    container_name: nextjs-frontend
+    working_dir: /app
+    ports:
+      - "3000:3000" # Expose the frontend on localhost:3000
+    volumes:
+      - .:/app # Mount your local Next.js project to the container
+      - /app/node_modules # Ensure container-specific node_modules
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: "http://todo-app:8000" # Backend API URL
+    command: ["npm", "run", "dev"] # Run the development server
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    external: true # Assuming the backend is already running in its own Compose setup
+
+networks:
+  app-network:
+    name: project-network # Shared network for frontend and backend
