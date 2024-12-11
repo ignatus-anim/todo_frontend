@@ -30,9 +30,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-    #   # Step 4: Build the production-ready frontend
-    #   - name: Build Next.js Frontend
-    #     run: npm run build
+    #   # Step 4: Set environment variables
+
+      - name: Export environment variables
+        run: |
+         echo "DOCKER_PASSWORD=${{secrets.DOCKER_USERNAME}}" >> $GITHUB_ENV
+         echo "DOCKER_USERNAME=${{secrets.DOCKER_PASSWORD}}" >> $GITHUB_ENV
+    
 
       # Step 5: Log in to Docker Hub
       - name: Log in to Docker Hub
