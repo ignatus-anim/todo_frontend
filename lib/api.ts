@@ -1,6 +1,6 @@
 import { Todo } from "./types";
 
-const API_BASE_URL = 'http://backend:8000';
+const API_BASE_URL = 'http://http://54.247.225.12:8000';
 
 export async function fetchTodos() {
   const response = await fetch(`${API_BASE_URL}/todos`);
