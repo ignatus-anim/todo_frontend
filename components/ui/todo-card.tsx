@@ -5,6 +5,7 @@ import { Todo } from '@/lib/types';
 import { Button } from './button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './card';
 import { Badge } from './badge';
+import { useMemo } from 'react';
 import { format } from 'date-fns';
 
 interface TodoCardProps {
@@ -21,7 +22,11 @@ const priorityColors = {
 };
 
 export function TodoCard({ todo, onEdit, onDelete, onToggleComplete }: TodoCardProps) {
-  console.log(todo);
+  // Memoized date formatting to prevent unnecessary recalculations
+  const formattedDate = useMemo(() => {
+    return format(new Date(todo.dueDate), 'MMMM dd, yyyy');
+  }, [todo.dueDate]);
+
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -52,7 +57,7 @@ export function TodoCard({ todo, onEdit, onDelete, onToggleComplete }: TodoCardP
         </p>
         <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
           <Calendar className="h-4 w-4" />
-          <span>{format(new Date(todo.dueDate), 'MMMM dd, yyyy')}</span>
+          <span>{formattedDate}</span>
         </div>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
