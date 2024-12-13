@@ -10,7 +10,6 @@ import { format } from 'date-fns';
 
 interface TodoCardProps {
   todo: Todo;
-  formattedDate: string; // Accept the formatted date as a prop
   onEdit: (todo: Todo) => void;
   onDelete: (id: string) => void;
   onToggleComplete: (id: string, completed: boolean) => void;
@@ -22,11 +21,11 @@ const priorityColors = {
   high: 'bg-red-500',
 };
 
-export function TodoCard({ todo, formattedDate,onEdit, onDelete, onToggleComplete }: TodoCardProps) {
+export function TodoCard({ todo, onEdit, onDelete, onToggleComplete }: TodoCardProps) {
   // Memoized date formatting to prevent unnecessary recalculations
-  // const formattedDate = useMemo(() => {
-  //   return format(new Date(todo.dueDate), 'MMMM dd, yyyy');
-  // }, [todo.dueDate]);
+  const formattedDate = useMemo(() => {
+    return format(new Date(todo.dueDate), 'MMMM dd, yyyy');
+  }, [todo.dueDate]);
 
   return (
     <Card className="w-full">
@@ -58,11 +57,7 @@ export function TodoCard({ todo, formattedDate,onEdit, onDelete, onToggleComplet
         </p>
         <div className="flex items-center gap-2 mt-2 text-sm text-muted-foreground">
           <Calendar className="h-4 w-4" />
-<<<<<<< HEAD
           <span>{formattedDate}</span>
-=======
-          {/* <span>{format(new Date(todo.dueDate), 'PPP')}</span> */}
->>>>>>> parent of 1711ce8 (chore: update todo-card.tsx)
         </div>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
