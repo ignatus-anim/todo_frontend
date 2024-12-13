@@ -24,8 +24,9 @@ const priorityColors = {
 export function TodoCard({ todo, onEdit, onDelete, onToggleComplete }: TodoCardProps) {
   // Memoized date formatting to prevent unnecessary recalculations
   const formattedDate = useMemo(() => {
-    return format(new Date(todo.dueDate), 'MMMM dd, yyyy');
-  }, [todo.dueDate]);
+    console.log(todo.duedate)
+    return format(new Date(todo.duedate), 'MMMM dd, yyyy');
+  }, [todo.duedate]);
 
   return (
     <Card className="w-full">
@@ -48,7 +49,7 @@ export function TodoCard({ todo, onEdit, onDelete, onToggleComplete }: TodoCardP
         </CardTitle>
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{todo.category}</Badge>
-          <Badge className={priorityColors[todo.priority]}>{todo.priority}</Badge>
+          <Badge className={`${todo.priority === 'Medium' ? priorityColors.medium  : todo.priority === 'High' ? priorityColors.high : priorityColors.low}`}>{todo.priority}</Badge>
         </div>
       </CardHeader>
       <CardContent>
