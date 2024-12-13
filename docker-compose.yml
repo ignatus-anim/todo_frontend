@@ -11,7 +11,7 @@ services:
       - .:/app # Mount your local Next.js project to the container
       - /app/node_modules # Ensure container-specific node_modules
     environment:
-      NEXT_PUBLIC_BACKEND_URL: "http://todo-app:8000" # Backend API URL
+      NEXT_PUBLIC_BACKEND_URL: "http://backend:8000" # Backend API URL
     command: ["npm", "run", "dev"] # Run the development server
     depends_on:
       - backend
