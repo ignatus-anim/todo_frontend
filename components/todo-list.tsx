@@ -19,6 +19,19 @@ export function TodoList({ todos, onEdit, onDelete, onToggleComplete }: TodoList
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
 
+  // Format the date for display
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    };
+    return date.toLocaleDateString('en-US', options); // Format like "Monday, 20th November, 2024"
+  };
+
+
   const filteredTodos = todos.filter((todo) => {
     const matchesSearch = todo.title.toLowerCase().includes(search.toLowerCase()) ||
                          todo.description.toLowerCase().includes(search.toLowerCase());
@@ -84,6 +97,7 @@ export function TodoList({ todos, onEdit, onDelete, onToggleComplete }: TodoList
           <TodoCard
             key={todo.id}
             todo={todo}
+            formattedDate={formatDate(todo.dueDate)}
             onEdit={onEdit}
             onDelete={onDelete}
             onToggleComplete={onToggleComplete}

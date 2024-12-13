@@ -28,7 +28,7 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm install && npm audit fix
 
      # Step 4: Set environment variables
 
